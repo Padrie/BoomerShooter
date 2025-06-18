@@ -1,13 +1,12 @@
 {
   "dependencies": {
     "com.domybest.mybox": {
-      "version": "https://github.com/Deadcows/MyBox.git",
+      "version": "file:C:/Users/Tufan/OneDrive/Desktop/S4G/MyBox-master",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
         "com.unity.ugui": "1.0.0"
-      },
-      "hash": "a8e97131539dafb8c9c8ec770afc721de1b40424"
+      }
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
