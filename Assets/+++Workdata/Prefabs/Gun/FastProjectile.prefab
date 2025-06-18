@@ -150,3 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileStats: {fileID: 11400000, guid: 651b9f6858b3bab41945ae445e8f07f5, type: 2}
+  damage: 0

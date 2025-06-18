@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 50
   attackDamage: 10
   attackSpeed: 1
   attackSound: {fileID: 8300000, guid: a24616aa84783ef4d94bfef57254d50a, type: 3}

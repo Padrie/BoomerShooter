@@ -41,7 +41,7 @@ public class Revolver : Gun
             }
             else if (Input.GetMouseButton(1))
             {
-                projectileForce = secondaryProjectileType.GetComponent<ExplosionProjectile>().projectileStats.projectileForce;
+                projectileForce = secondaryProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
                 HandleShooting(secondaryProjectileType);
                 yield return new WaitForSeconds(shootSpeed);
 
@@ -105,7 +105,7 @@ public class Revolver : Gun
     IEnumerator CameraShake()
     {
         float elapsed = 0f;
-        float shakeAmount = 0.1f;
+        float shakeAmount = 0.2f;
         float shakeDuration = 0.05f;
 
         while (elapsed < shakeDuration)
