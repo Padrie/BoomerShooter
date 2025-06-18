@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     public float reloadTime;
     //public float shootSpeed;
     [Range(0f,1f)]public float bulletSpread;
+    public float shootSpeed;
 
     [HideInInspector] public int currentAmmoAmount;
     [HideInInspector] public bool isReloading = false;

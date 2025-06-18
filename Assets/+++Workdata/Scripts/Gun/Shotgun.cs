@@ -21,32 +21,35 @@ public class Shotgun : Gun
         ResetValues();
     }
 
-    private void Update()
+    public IEnumerator DetermineAmmo()
     {
-        DetermineAmmo();
-    }
-
-    public void DetermineAmmo()
-    {
-        if (currentAmmoAmount <= 0)
+        while (true)
         {
-            currentAmmoAmount = 0;
-            if (!isReloading)
+            if (currentAmmoAmount <= 0)
             {
-                StartCoroutine(Reload());
-                print(currentAmmoAmount);
+                currentAmmoAmount = 0;
+                if (!isReloading)
+                {
+                    StartCoroutine(Reload());
+                }
             }
-        }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            projectileForce = firstProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
-            HandleShooting(firstProjectileType);
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            projectileForce = secondaryProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
-            HandleShooting(secondaryProjectileType);
+            if (Input.GetMouseButton(0))
+            {
+                projectileForce = firstProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                HandleShooting(firstProjectileType);
+                yield return new WaitForSeconds(shootSpeed);
+
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                projectileForce = secondaryProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                HandleShooting(secondaryProjectileType);
+                yield return new WaitForSeconds(shootSpeed);
+
+            }
+
+            yield return null;
         }
     }
 
@@ -103,12 +106,13 @@ public class Shotgun : Gun
         currentAmmoAmount = ammoAmount;
         isReloading = false;
         StopAllCoroutines();
+        StartCoroutine(DetermineAmmo());
     }
 
     IEnumerator CameraShake()
     {
         float elapsed = 0f;
-        float shakeAmount = 0.2f;
+        float shakeAmount = 0.25f;
         float shakeDuration = 0.05f;
 
         while (elapsed < shakeDuration)

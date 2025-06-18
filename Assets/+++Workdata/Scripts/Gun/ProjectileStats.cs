@@ -7,7 +7,8 @@ public class ProjectileStats : ScriptableObject
     public enum ProjectileType
     {
         Fast,
-        Slow
+        Slow,
+        Explosion
     }
 
     public ProjectileType projectileType;
