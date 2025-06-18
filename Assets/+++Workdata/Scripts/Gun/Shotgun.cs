@@ -112,7 +112,7 @@ public class Shotgun : Gun
     IEnumerator CameraShake()
     {
         float elapsed = 0f;
-        float shakeAmount = 0.25f;
+        float shakeAmount = 0.5f;
         float shakeDuration = 0.05f;
 
         while (elapsed < shakeDuration)
