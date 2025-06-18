@@ -6,13 +6,13 @@ public class ProjectileStats : ScriptableObject
 {
     public enum ProjectileType
     {
-        Fire,
-        Gasoline
+        Fast,
+        Slow
     }
 
     public ProjectileType projectileType;
 
     public int damage;
     public int penetration;
-    public float projectileForce = 1000f;
+    public float projectileForce;
 }

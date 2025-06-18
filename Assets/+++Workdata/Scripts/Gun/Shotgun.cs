@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Revolver : Gun
+public class Shotgun : Gun
 {
     Camera playerCamera;
     Vector3 originalPos;
+
+    public int projectileAmount;
 
     public void Start()
     {
@@ -60,23 +62,28 @@ public class Revolver : Gun
         }
         else
         {
-            print(ammoType.name);
-            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f));
-            Vector3 shootDirection = ray.direction + Random.insideUnitSphere * bulletSpread;
-
-            GameObject projectile = Instantiate(
-                ammoType,
-                playerCamera.transform.position + ray.direction.normalized * 2f,
-                Quaternion.LookRotation(shootDirection)
-            );
-
-            particleSystem.Play();
-            StartCoroutine(CameraShake());
-
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb)
+            for (int i = 0; i < projectileAmount; i++)
             {
-                rb.AddForce(shootDirection * projectileForce);
+                print(ammoType.name);
+                Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f));
+                Vector3 shootDirection = ray.direction + Random.insideUnitSphere * bulletSpread;
+
+                GameObject projectile = Instantiate(
+                    ammoType,
+                    playerCamera.transform.position + ray.direction.normalized * 2f,
+                    Quaternion.LookRotation(shootDirection)
+                );
+
+                particleSystem.Play();
+                StartCoroutine(CameraShake());
+
+                projectile.GetComponent<Projectile>().damage /= 5;
+
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                if (rb)
+                {
+                    rb.AddForce(shootDirection * projectileForce);
+                }
             }
         }
 

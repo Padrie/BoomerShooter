@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public GameObject firstProjectileType;
-    public GameObject secondaryProjectileType;
+    [HideInInspector] public GameObject firstProjectileType;
+    [HideInInspector] public GameObject secondaryProjectileType;
     public new ParticleSystem particleSystem;
     [HideInInspector] public float projectileForce;
 

@@ -4,7 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public ProjectileStats projectileStats;
 
-    int damage;
+    [HideInInspector] public int damage;
     int penetration;
 
     private void Awake()

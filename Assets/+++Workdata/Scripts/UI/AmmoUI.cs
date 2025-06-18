@@ -8,7 +8,7 @@ public class AmmoUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] Image progressBar;
 
-    [SerializeField] Gun gun;
+    public Gun gun;
 
     bool progressBarFill = false;
 
@@ -24,10 +24,7 @@ public class AmmoUI : MonoBehaviour
 
     public void UpdateCurrentAmmo()
     {
-        string[] parts = ammoText.text.Split('/');
-        if (parts.Length != 2) return;
-
-        ammoText.text = $"{gun.currentAmmoAmount}/{parts[1]}";
+        ammoText.text = $"{gun.currentAmmoAmount}/{gun.ammoAmount}";
     }
 
     IEnumerator fillProgressBar()
