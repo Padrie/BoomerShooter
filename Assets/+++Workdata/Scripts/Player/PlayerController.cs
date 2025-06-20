@@ -13,20 +13,23 @@ public class PlayerController : MonoBehaviour
     public Vector3 velocity;
     public float gravity = -9.81f;
     public bool isGrounded;
+    public bool dashing;
+    public bool canDash = true;
+    public bool bufferJump;
     public float groundDistance = 1.2f;
     
     [Header("Movement")]
     public float speed = 4f;
     public float airSpeed = 6f;
     public float jumpHeight = 5f;
-    public float dashTime = 20f;
-    public float dashSpeed = 50f;
-    float inputX , inputZ;
+    public float airDashTime = 40f ,airDashSpeed = 50f;
+    public float dashTime = 40f ,dashSpeed = 75f;
+    public float inputX , inputZ;
     
     [Header("Camera")]
     public Camera camera;
     public float sensitivity = 400;
-    public float cameraTilt = 3, tiltSpeed = 2;
+    public float cameraTilt = 2.5f, tiltSpeed = 2;
     float rotX , rotY, rotZ;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,7 +49,7 @@ public class PlayerController : MonoBehaviour
         
         HandleCameraMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             HandleJump();
         }
@@ -54,15 +57,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             StartCoroutine(HandleDash());
-        }
+        }*/
         
     }
 
     void FixedUpdate()
     {
         HandleGravity();
-        
-        HandleMovement();
         
         HandleVelocity();
     }
@@ -86,19 +87,15 @@ public class PlayerController : MonoBehaviour
 
     public void HandleMovement()
     {
-        if (inputX != 0 || inputZ != 0)
+        if (isGrounded)
         {
-            if (isGrounded)
-            {
-                velocity.x = (transform.right * inputX + transform.forward * inputZ).x * speed;
-                velocity.z = (transform.right * inputX + transform.forward * inputZ).z * speed;
-            }
-            else
-            {
-                velocity.x = (transform.right * inputX + transform.forward * inputZ).x * airSpeed;
-                velocity.z = (transform.right * inputX + transform.forward * inputZ).z * airSpeed;
-            }
-            
+            velocity.x = (transform.right * inputX + transform.forward * inputZ).x * speed;
+            velocity.z = (transform.right * inputX + transform.forward * inputZ).z * speed;
+        }
+        else
+        {
+            velocity.x += (transform.right * inputX + transform.forward * inputZ).x * airSpeed * 0.02f;
+            velocity.z += (transform.right * inputX + transform.forward * inputZ).z * airSpeed * 0.02f;
         }
 
         characterController.Move(velocity * Time.deltaTime);
@@ -109,11 +106,34 @@ public class PlayerController : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
+    public IEnumerator HandleAirDash()
+    {
+        dashing = true;
+        for (int i = 0; i < airDashTime; i++)
+        {
+            velocity = (transform.right * inputX + transform.forward * inputZ) * airDashSpeed;
+            Debug.Log(i);
+            if (i == airDashTime - 1)
+            {
+                dashing = false;
+                Debug.Log("Done");
+            }
+            yield return null;
+        }
+    }
+    
     public IEnumerator HandleDash()
     {
+        dashing = true;
         for (int i = 0; i < dashTime; i++)
         {
             velocity = (transform.right * inputX + transform.forward * inputZ) * dashSpeed;
+
+            if (i == dashTime - 1)
+            {
+                dashing = false;
+                Debug.Log("Done");
+            }
             yield return null;
         }
     }

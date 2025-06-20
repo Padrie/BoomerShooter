@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace ___Workdata.Scripts.Player.StateMachine
@@ -8,14 +9,16 @@ namespace ___Workdata.Scripts.Player.StateMachine
         public State nextState;
         protected bool endCalled;
         public PlayerController playerController;
-    
-    
-        public virtual void Enter() {}
-    
-        public void Start() 
-        { 
-            playerController = GetComponent<PlayerController>();
+        private StateMachine stateMachine;  
+
+        public void Start()
+        {
+            stateMachine = GetComponent<StateMachine>();
         }
+
+        public virtual void Enter() {}
+
+        public virtual void Initialize() { }
     
         public virtual void StateUpdate() { }
     
@@ -38,8 +41,30 @@ namespace ___Workdata.Scripts.Player.StateMachine
                 Exit();
             }
         }
+        
+        public void End(string state)
+        {
+            endCalled = true;
+            State nState = GetState(state);
     
-        public void reset()
+            if (nextState == null)
+            {
+                if (state == null)
+                {
+                    throw new ArgumentNullException("State");
+                }
+                    
+                nextState = nState;
+                Exit();
+            }
+        }
+        
+        public State GetState(string statename)
+        {
+            return stateMachine.States.Find(state => state.ToString() == statename);
+        }
+    
+        public void Reset()
         {
             endCalled = false;
         }
@@ -47,6 +72,11 @@ namespace ___Workdata.Scripts.Player.StateMachine
         public bool getEndCalled() 
         {
             return endCalled;
+        }
+
+        public override string ToString()
+        {
+            return this.GetType().Name;
         }
     }
 }
