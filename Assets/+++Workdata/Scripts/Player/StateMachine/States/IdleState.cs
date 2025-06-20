@@ -6,7 +6,7 @@ namespace ___Workdata.Scripts.Player.StateMachine.States
     {
         public override void StateFixedUpdate()
         {
- 
+            
         }
     }
 }

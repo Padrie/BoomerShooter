@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,18 +13,21 @@ public class PlayerController : MonoBehaviour
     public Vector3 velocity;
     public float gravity = -9.81f;
     public bool isGrounded;
-    public bool isCrouching = false;
     public float groundDistance = 1.2f;
     
     [Header("Movement")]
-    public float speed = 7f;
+    public float speed = 4f;
+    public float airSpeed = 6f;
     public float jumpHeight = 5f;
+    public float dashTime = 20f;
+    public float dashSpeed = 50f;
     float inputX , inputZ;
     
     [Header("Camera")]
     public Camera camera;
     public float sensitivity = 400;
-    float rotX , rotY;
+    public float cameraTilt = 3, tiltSpeed = 2;
+    float rotX , rotY, rotZ;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         CheckGrounded();
         
         HandleInput();
@@ -48,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            HandleDash();
+            StartCoroutine(HandleDash());
         }
         
     }
@@ -81,10 +86,19 @@ public class PlayerController : MonoBehaviour
 
     public void HandleMovement()
     {
-        if (!Input.GetKey(KeyCode.C))
+        if (inputX != 0 || inputZ != 0)
         {
-            velocity.x = (transform.right * inputX + transform.forward * inputZ).x * 4f;
-            velocity.z = (transform.right * inputX + transform.forward * inputZ).z * 4f;
+            if (isGrounded)
+            {
+                velocity.x = (transform.right * inputX + transform.forward * inputZ).x * speed;
+                velocity.z = (transform.right * inputX + transform.forward * inputZ).z * speed;
+            }
+            else
+            {
+                velocity.x = (transform.right * inputX + transform.forward * inputZ).x * airSpeed;
+                velocity.z = (transform.right * inputX + transform.forward * inputZ).z * airSpeed;
+            }
+            
         }
 
         characterController.Move(velocity * Time.deltaTime);
@@ -95,9 +109,13 @@ public class PlayerController : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
-    public void HandleDash()
+    public IEnumerator HandleDash()
     {
-        velocity = (transform.right * inputX + transform.forward * inputZ) * 200f;
+        for (int i = 0; i < dashTime; i++)
+        {
+            velocity = (transform.right * inputX + transform.forward * inputZ) * dashSpeed;
+            yield return null;
+        }
     }
 
     public void HandleVelocity()
@@ -121,9 +139,10 @@ public class PlayerController : MonoBehaviour
         
         //Limit rot
         rotY = Mathf.Clamp(rotY, -90, 90);
+        rotZ = Mathf.Lerp(rotZ, -inputX * cameraTilt, Time.deltaTime * tiltSpeed);
         
         //Rotate Camera and Player(Body)
-        camera.transform.localRotation = Quaternion.Euler(rotY, 0 , 0);
+        camera.transform.localRotation = Quaternion.Euler(rotY, 0 , rotZ);
         
         //body.Rotate(Vector3.up * rotX);
         transform.rotation = Quaternion.Euler(0, rotX, 0);
