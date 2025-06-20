@@ -96,12 +96,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6609210595782694710}
   - component: {fileID: 3913855421721678699}
-  - component: {fileID: 2252699051266231459}
-  - component: {fileID: 2342872991182139298}
-  - component: {fileID: 1121276122047522743}
-  - component: {fileID: 652679463759990719}
-  - component: {fileID: 6229142008675841601}
-  - component: {fileID: 3865114600755884796}
+  - component: {fileID: 4491561523165290116}
+  - component: {fileID: 3428688972964717998}
+  - component: {fileID: 7009182558956293300}
   - component: {fileID: 1845792074806919619}
   - component: {fileID: 4424648184232577138}
   - component: {fileID: 2304708465751287046}
@@ -154,7 +151,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2252699051266231459
+--- !u!114 &4491561523165290116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,24 +160,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2342752851373011389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7cf9b27296328b43a7b564b46a13630, type: 3}
+  m_Script: {fileID: 11500000, guid: 97b793f2b487df44797bc59229eb0409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 3168954297914852502}
   characterController: {fileID: 3913855421721678699}
-  playerBody: {fileID: 6714619236609665749}
-  gravity: -9.81
+  body: {fileID: 6714619236609665749}
   velocity: {x: 0, y: 0, z: 0}
+  gravity: -9.81
   isGrounded: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 136
-  groundDistance: 1.1
-  WalkSpeed: 10
-  RunSpeed: 14
-  JumpHeight: 5
-  sensitivity: 500
---- !u!114 &2342872991182139298
+  isCrouching: 0
+  groundDistance: 1.2
+  speed: 7
+  jumpHeight: 5
+  camera: {fileID: 3168954297914852502}
+  sensitivity: 400
+--- !u!114 &3428688972964717998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,12 +183,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2342752851373011389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ddce59c75c4334290eb011caad44f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a20283ef8494251b8847248574da30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 1121276122047522743}
+  currentState: {fileID: 0}
   lastState: {fileID: 0}
---- !u!114 &1121276122047522743
+--- !u!114 &7009182558956293300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,67 +197,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2342752851373011389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855b9b854e0e45e09ca619171decefd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c2540fbd52a478daea09c1e54f32bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextState: {fileID: 0}
-  playerController: {fileID: 2252699051266231459}
-  walkState: {fileID: 0}
-  runState: {fileID: 0}
-  dashState: {fileID: 0}
-  crouchState: {fileID: 0}
-  jumpState: {fileID: 652679463759990719}
-  fallState: {fileID: 6229142008675841601}
---- !u!114 &652679463759990719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2342752851373011389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774237f762ee47079a1c23946da7baa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextState: {fileID: 0}
-  playerController: {fileID: 2252699051266231459}
-  idleState: {fileID: 1121276122047522743}
-  fallState: {fileID: 6229142008675841601}
-  dashState: {fileID: 0}
---- !u!114 &6229142008675841601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2342752851373011389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8acfeb7e37474986bfc8fa3684e3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextState: {fileID: 0}
-  playerController: {fileID: 2252699051266231459}
-  idleState: {fileID: 1121276122047522743}
-  dashState: {fileID: 0}
-  glideState: {fileID: 3865114600755884796}
---- !u!114 &3865114600755884796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2342752851373011389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b63f28338474b28be725d57286690e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextState: {fileID: 0}
-  playerController: {fileID: 2252699051266231459}
-  idleState: {fileID: 1121276122047522743}
-  dashState: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!136 &1845792074806919619
 CapsuleCollider:
   m_ObjectHideFlags: 0
