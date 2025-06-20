@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 1
   damage: 100
-  penetration: 1
-  projectileForce: 200
+  penetration: 100
+  projectileForce: 500
