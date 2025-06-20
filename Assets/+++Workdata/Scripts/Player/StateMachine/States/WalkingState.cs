@@ -17,6 +17,11 @@ namespace ___Workdata.Scripts.Player.StateMachine.States
                 End("JumpState");
                 return;
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerController.canDash)
+            {
+                End("AirDashState");
+            }
             
         }
 

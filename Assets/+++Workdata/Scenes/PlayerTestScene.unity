@@ -2124,6 +2124,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: airSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: dashTime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: dashSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: airDashTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879030211228029310, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: airDashSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5488203747508454552, guid: aece69009027eae4097874c626206cf3, type: 3}
       propertyPath: m_Name
       value: Player

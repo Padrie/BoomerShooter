@@ -4,10 +4,21 @@ namespace ___Workdata.Scripts.Player.StateMachine.States
 {
     public class AirDashState : State
     {
+        private Coroutine running;
+        
+        public override void Enter()
+        {
+            playerController.canDash = false;
+        }
 
         public override void StateUpdate()
         {
-            StartCoroutine(playerController.HandleAirDash());
+            running = StartCoroutine(playerController.HandleAirDash());
+
+            if (running == null)
+            {
+                Debug.Log("not running");
+            }
             
             if (playerController.isGrounded)
             {

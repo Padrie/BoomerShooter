@@ -53,7 +53,7 @@ namespace ___Workdata.Scripts.Player.StateMachine
                 {
                     throw new ArgumentNullException("State");
                 }
-                    
+                
                 nextState = nState;
                 Exit();
             }

@@ -25,5 +25,10 @@ namespace ___Workdata.Scripts.Player.StateMachine.States
                 playerController.HandleMovement();
             }
         }
+
+        public override void Exit()
+        {
+            playerController.canDash = true;
+        }
     }
 }

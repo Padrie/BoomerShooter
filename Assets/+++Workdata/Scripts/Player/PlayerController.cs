@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 velocity;
     public float gravity = -9.81f;
     public bool isGrounded;
-    public bool dashing;
     public bool canDash = true;
     public bool bufferJump;
     public float groundDistance = 1.2f;
@@ -52,12 +51,12 @@ public class PlayerController : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             HandleJump();
-        }
+        }*/
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded)
         {
             StartCoroutine(HandleDash());
-        }*/
+        }
         
     }
 
@@ -108,32 +107,18 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator HandleAirDash()
     {
-        dashing = true;
         for (int i = 0; i < airDashTime; i++)
         {
             velocity = (transform.right * inputX + transform.forward * inputZ) * airDashSpeed;
-            Debug.Log(i);
-            if (i == airDashTime - 1)
-            {
-                dashing = false;
-                Debug.Log("Done");
-            }
             yield return null;
         }
     }
     
     public IEnumerator HandleDash()
     {
-        dashing = true;
         for (int i = 0; i < dashTime; i++)
         {
             velocity = (transform.right * inputX + transform.forward * inputZ) * dashSpeed;
-
-            if (i == dashTime - 1)
-            {
-                dashing = false;
-                Debug.Log("Done");
-            }
             yield return null;
         }
     }
