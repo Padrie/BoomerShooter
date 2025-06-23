@@ -34,14 +34,14 @@ public class Revolver : Gun
 
             if (Input.GetMouseButton(0))
             {
-                projectileForce = firstProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                projectileForce = firstProjectileType.GetComponent<Bullet>().bulletSpeed;
                 HandleShooting(firstProjectileType);
                 yield return new WaitForSeconds(shootSpeed);
 
             }
             else if (Input.GetMouseButton(1))
             {
-                projectileForce = secondaryProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                projectileForce = secondaryProjectileType.GetComponent<Bullet>().bulletSpeed;
                 HandleShooting(secondaryProjectileType);
                 yield return new WaitForSeconds(shootSpeed);
 

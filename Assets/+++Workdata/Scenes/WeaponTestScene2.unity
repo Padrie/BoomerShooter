@@ -10624,6 +10624,14 @@ PrefabInstance:
       propertyPath: ammoUi
       value: 
       objectReference: {fileID: 1203651008}
+    - target: {fileID: 6597003333276857156, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: firstAmmoType
+      value: 
+      objectReference: {fileID: 661793553714351015, guid: 3ec48f704f2e55e42b43880a108c0ae2, type: 3}
+    - target: {fileID: 6597003333276857156, guid: aece69009027eae4097874c626206cf3, type: 3}
+      propertyPath: secondAmmoType
+      value: 
+      objectReference: {fileID: 661793553714351015, guid: 3ec48f704f2e55e42b43880a108c0ae2, type: 3}
     - target: {fileID: 7173599166896449999, guid: aece69009027eae4097874c626206cf3, type: 3}
       propertyPath: m_Material
       value: 

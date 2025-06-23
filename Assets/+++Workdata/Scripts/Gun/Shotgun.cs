@@ -7,6 +7,7 @@ public class Shotgun : Gun
     Camera playerCamera;
     Vector3 originalPos;
 
+    public float bulletSpeed = 800f;
     public int projectileAmount;
 
     public void Start()
@@ -36,14 +37,14 @@ public class Shotgun : Gun
 
             if (Input.GetMouseButton(0))
             {
-                projectileForce = firstProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                projectileForce = firstProjectileType.GetComponent<Bullet>().bulletSpeed;
                 HandleShooting(firstProjectileType);
                 yield return new WaitForSeconds(shootSpeed);
 
             }
             else if (Input.GetMouseButton(1))
             {
-                projectileForce = secondaryProjectileType.GetComponent<Projectile>().projectileStats.projectileForce;
+                projectileForce = secondaryProjectileType.GetComponent<Bullet>().bulletSpeed;
                 HandleShooting(secondaryProjectileType);
                 yield return new WaitForSeconds(shootSpeed);
 
@@ -80,7 +81,7 @@ public class Shotgun : Gun
                 particleSystem.Play();
                 StartCoroutine(CameraShake());
 
-                projectile.GetComponent<Projectile>().damage /= 5;
+                projectile.GetComponent<Bullet>().bulletDamage /= 5;
 
                 Rigidbody rb = projectile.GetComponent<Rigidbody>();
                 if (rb)
